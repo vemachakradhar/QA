@@ -98,7 +98,7 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>facebook Releases Nexus Repository</name>
-	      <url>http://13.127.11.99:8081/repository/facebook-releases/</url>
+	      <url>http://13.233.91.144:8081/repository/facebook-releases/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
