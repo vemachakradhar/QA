@@ -1,0 +1,23 @@
+ node{
+     def mavenHome = tool name:"maven3.8.5"
+     //checkout stage
+    stage('checkoutcode'){
+     git credentialsId: 'f51b4709-d5c9-48b1-abf5-e2bb146748b5', url: 'https://github.com/vemachakradhar/QA.git'
+ }
+
+ //Build stage
+ stage('Build'){
+     sh "$mavenHome/bin/mvn clean package"
+ }
+ //Generator sonarqube report
+ stage('sonarqubereport'){
+    sh "$mavenHome/bin/mvn sonar:sonar"
+ }
+//Deploy App Into Tomcat Server
+ stage ('DeployAppIntoTomcatServer'){
+ sshagent(['dfb39d9a-c914-4175-b031-5728aed99eaf']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.46.180:/opt/apache-tomcat-9.0.59/webapps"
+ }    
+ }
+ 
+ }//node closing
